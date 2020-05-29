@@ -8,11 +8,11 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Characters(@SerializedName("code")            @Expose var code: Int? = null,
-                      @SerializedName("status")          @Expose var status: String? = null,
-                      @SerializedName("copyright")       @Expose var copyright: String? = null,
-                      @SerializedName("attributionText") @Expose var attributionText: String? = null,
-                      @SerializedName("attributionHTML") @Expose var attributionHTML: String? = null,
-                      @SerializedName("etag")            @Expose var etag: String? = null,
-                      @SerializedName("data")            @Expose var data: Data? = null
+data class Characters(@SerializedName("code")            @Expose var code: Int,
+                      @SerializedName("status")          @Expose var status: String,
+                      @SerializedName("copyright")       @Expose var copyright: String,
+                      @SerializedName("attributionText") @Expose var attributionText: String,
+                      @SerializedName("attributionHTML") @Expose var attributionHTML: String,
+                      @SerializedName("etag")            @Expose var etag: String,
+                      @SerializedName("data")            @Expose var data: Data
 ) : Parcelable

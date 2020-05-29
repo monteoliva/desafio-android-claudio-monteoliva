@@ -3,8 +3,9 @@ package br.com.desafioandroidclaudiomonteoliva.view
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.os.Parcelable
+import android.util.Log
 import android.view.View
+import android.widget.ProgressBar
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,12 +16,17 @@ import br.com.desafioandroidclaudiomonteoliva.presenter.character.MVP
 import br.com.desafioandroidclaudiomonteoliva.presenter.character.Presenter
 import br.com.desafioandroidclaudiomonteoliva.view.adapter.ItemAdapter
 import br.com.desafioandroidclaudiomonteoliva.view.components.Progress
+import br.com.desafioandroidclaudiomonteoliva.view.pagination.PaginationListener
 
 class MainActivity : DefaultActivity(), MVP.View {
     private lateinit var progress: Progress
     private lateinit var rv: RecyclerView
     private lateinit var presenter: MVP.Presenter
     private lateinit var adapter: ItemAdapter
+    private lateinit var loading: ProgressBar
+
+    private var isLastPage: Boolean = false
+    private var isLoading: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +36,11 @@ class MainActivity : DefaultActivity(), MVP.View {
         setActionBarTitle("")
 
         progress = findViewById(R.id.progress)
+        loading  = findViewById(R.id.progressbar)
 
         presenter = Presenter()
         presenter.setView(this)
-        presenter.retriveCharacters(savedInstanceState)
+        presenter.retriveFirstCharacters()
 
         Handler().postDelayed({ onLoad() }, 100)
     }
@@ -47,6 +54,16 @@ class MainActivity : DefaultActivity(), MVP.View {
         rv.setHasFixedSize(true)
         rv.layoutManager = layoutManager
         rv.adapter = adapter
+        rv.addOnScrollListener(object : PaginationListener(layoutManager) {
+            override fun loadMoreItems() {
+                Log.d("MORE ITENS", "LOAD MORE ITENS")
+                isLoading = true
+                presenter.retriveMoreCharacters()
+            }
+
+            override fun isLastPage(): Boolean = isLastPage
+            override fun isLoading(): Boolean  = isLoading
+        })
     }
 
     override fun back() { finish() }
@@ -57,11 +74,16 @@ class MainActivity : DefaultActivity(), MVP.View {
         }
     }
 
+    override fun showLoading(visible: Int) {
+        loading.visibility = visible
+    }
+
     override fun updateListRecycler() {
         adapter.notifyDataSetChanged()
     }
 
     override fun paginationRecycler() {
+        isLoading = false
         adapter.notifyDataSetChanged()
     }
 
@@ -74,10 +96,5 @@ class MainActivity : DefaultActivity(), MVP.View {
 
         startActivity(intent)
         animBottomToTop()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelableArrayList(MVP.View.CHARACTER_KEY, ArrayList<Parcelable>(presenter.characters))
-        super.onSaveInstanceState(outState)
     }
 }

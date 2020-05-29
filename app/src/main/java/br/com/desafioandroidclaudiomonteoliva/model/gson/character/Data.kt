@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Data(@SerializedName("offset")  @Expose var offset: Int? = null,
-                @SerializedName("limit")   @Expose var limit: Int? = null,
-                @SerializedName("total")   @Expose var total: Int? = null,
-                @SerializedName("count")   @Expose var count: Int? = null,
+data class Data(@SerializedName("offset")  @Expose var offset: Int,
+                @SerializedName("limit")   @Expose var limit: Int,
+                @SerializedName("total")   @Expose var total: Int,
+                @SerializedName("count")   @Expose var count: Int,
                 @SerializedName("results") @Expose var results: List<Result>? = null
 ) : Parcelable

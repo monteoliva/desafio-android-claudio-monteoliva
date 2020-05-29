@@ -16,7 +16,7 @@ import br.com.desafioandroidclaudiomonteoliva.R
 import br.com.desafioandroidclaudiomonteoliva.view.MainActivity
 
 class ItemAdapter(private val activity: MainActivity,
-                  private val list: List<Result>) : RecyclerView.Adapter<ItemAdapter.ViewHolder>()  {
+                  private val list: MutableList<Result>) : RecyclerView.Adapter<ItemAdapter.ViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater

@@ -11,6 +11,7 @@ import br.com.desafioandroidclaudiomonteoliva.model.gson.character.Result
 interface MVP {
     interface Model {
         fun retriveCharacters()
+        fun retriveMoreCharacters()
     }
 
     interface Presenter {
@@ -18,7 +19,9 @@ interface MVP {
         val characters: MutableList<Result>
         fun setView(view: View)
         fun showProgressBar(status: Boolean)
-        fun retriveCharacters(savedInstanceState: Bundle?)
+        fun showLoading(status: Boolean)
+        fun retriveFirstCharacters()
+        fun retriveMoreCharacters()
         fun updateListRecycler(list: MutableList<Result>)
         fun paginationRecycler(list: MutableList<Result>)
     }
@@ -30,6 +33,7 @@ interface MVP {
         }
 
         fun showProgressBar(visible: Int)
+        fun showLoading(visible: Int)
         fun updateListRecycler()
         fun paginationRecycler()
     }

@@ -1,8 +1,6 @@
 package br.com.desafioandroidclaudiomonteoliva.presenter.character
 
 import android.content.Context
-import android.os.Bundle
-import android.os.Parcelable
 import android.view.View
 
 import br.com.desafioandroidclaudiomonteoliva.model.character.Model
@@ -25,14 +23,17 @@ class Presenter : MVP.Presenter {
         view.showProgressBar(visible)
     }
 
-    override fun retriveCharacters(savedInstanceState: Bundle?) {
-        if( savedInstanceState != null ) {
-            var recipeArray: ArrayList<Parcelable> = savedInstanceState.getParcelableArrayList(
-                MVP.View.CHARACTER_KEY)!!
-            list = recipeArray as MutableList<Result>
-            return;
-        }
+    override fun showLoading(status: Boolean) {
+        val visible: Int = if (status) View.VISIBLE else View.INVISIBLE
+        view.showLoading(visible)
+    }
+
+    override fun retriveFirstCharacters() {
         model.retriveCharacters()
+    }
+
+    override fun retriveMoreCharacters() {
+        model.retriveMoreCharacters()
     }
 
     override fun updateListRecycler(list: MutableList<Result>) {
