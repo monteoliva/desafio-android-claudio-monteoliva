@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ED1D24</color>
+    <color name="colorPrimaryDark">#B20000</color>
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorBackground">#D3D3D3</color>
+    <color name="colorText">#FFFFFF</color>
+    <color name="colorOpacity">#95000000</color>
+    <color name="colorRedOpacity">#55ED1D24</color>
+    <color name="colorItemText">#363636</color>
+    <color name="colorItemShadow">#808080</color>
+
+
+    <color name="colorBtnBorder">#FFFFFF</color>
+    <color name="colorBtnOn">#ED1D24</color>
+    <color name="colorBtnOff">#1E90FF</color>
+
+
+</resources>

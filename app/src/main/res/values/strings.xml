@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Desafio Android Claudio Monteoliva</string>
+    <string name="progress_wait">Aguarde&#8230;</string>
+    <string name="content_description_logo">Logo Marvel</string>
+    <string name="content_description_item">Item Name</string>
+    <string name="detail_description">Description</string>
+    <string name="btnHQ">HQ</string>
+    <string name="txt_character_name">Character Name</string>
+    <string name="txt_detail_name">Name</string>
+    <string name="txt_comics_price">$ 0.00</string>
+</resources>
