@@ -29,7 +29,7 @@ class Presenter : MVP.Presenter {
     }
 
     override fun retriveFirstCharacters() {
-        model.retriveCharacters()
+        model.retriveFirstCharacters()
     }
 
     override fun retriveMoreCharacters() {

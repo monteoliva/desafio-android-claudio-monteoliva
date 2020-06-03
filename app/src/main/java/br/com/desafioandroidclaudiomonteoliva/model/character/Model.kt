@@ -55,7 +55,7 @@ class Model(private val presenter: MVP.Presenter): MVP.Model {
         requestQueue.add(request)
     }
 
-    override fun retriveCharacters() {
+    override fun retriveFirstCharacters() {
         requestQueue = Volley.newRequestQueue(presenter.context)
         offset = 0
 

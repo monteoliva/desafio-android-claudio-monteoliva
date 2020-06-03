@@ -10,7 +10,7 @@ import br.com.desafioandroidclaudiomonteoliva.model.gson.character.Result
  */
 interface MVP {
     interface Model {
-        fun retriveCharacters()
+        fun retriveFirstCharacters()
         fun retriveMoreCharacters()
     }
 
