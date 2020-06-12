@@ -29,37 +29,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="56dp"
+                android:padding="15dp"
                 android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/comicsImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:src="@mipmap/ic_image_not_available"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitXY" />
-                <LinearLayout
+                <TextView
+                    android:id="@+id/comicsPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/comicsPrice"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/txt_comics_price"
-                        style="@style/detailTile" />
-                    <TextView
-                        android:id="@+id/comicsTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="160dp"
-                        android:text="@string/txt_detail_name"
-                        android:lines="2"
-                        style="@style/detailTile" />
+                    android:text="@string/txt_comics_price"
+                    style="@style/detailTile" />
+                <TextView
+                    android:id="@+id/comicsTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="160dp"
+                    android:text="@string/txt_detail_name"
+                    android:lines="2"
+                    style="@style/detailTile" />
                 </LinearLayout>
-            </LinearLayout>
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

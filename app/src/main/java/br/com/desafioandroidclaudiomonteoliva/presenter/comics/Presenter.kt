@@ -25,12 +25,18 @@ class Presenter : MVP.Presenter {
     }
 
     override fun updateData(bean: ComicsBean) {
-        val description: String? = if (bean.description!!.isEmpty()) "No description" else bean.description
-        val title: String = if (bean.title.isEmpty()) "No Title" else bean.title
-        val imageUrl = "${bean.thumbnail?.path}.${bean.thumbnail?.extension}"
+        try {
+            val description: String? = if (bean.description!!.isEmpty()) "No description" else bean.description
+            val title: String = if (bean.title.isEmpty()) "No Title" else bean.title
+            val imageUrl = "${bean.thumbnail?.path}.${bean.thumbnail?.extension}"
 
-        view.showTexts(title, description!!, "$ ${bean.price.toString()}")
-        view.showComicsImage(imageUrl)
-        view.showCharacterImage()
+            view.showTexts(title, description!!, "$ ${bean.price.toString()}")
+            view.showComicsImage(imageUrl)
+            view.showCharacterImage()
+        }
+        catch (pn: KotlinNullPointerException) {
+            view.showTexts("No Title", "No description", "$ 0.00")
+            view.showCharacterImage()
+        }
     }
 }
