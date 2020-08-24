@@ -14,7 +14,7 @@ import br.com.desafioandroidclaudiomonteoliva.presenter.detail.MVP
 import br.com.desafioandroidclaudiomonteoliva.presenter.detail.Presenter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class DetailActivity : DefaultActivity(), MVP.View {
+class DetailActivity : DefaultActivity(R.layout.activity_detail), MVP.View {
     private lateinit var presenter: MVP.Presenter
     private lateinit var detailImage: ImageView
     private lateinit var detailName: TextView
@@ -24,10 +24,7 @@ class DetailActivity : DefaultActivity(), MVP.View {
     private var item: Result? = null
     private var imageUrl: String = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
-
+    override fun initViews() {
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
             item = bundle.getParcelable("ITEM")
@@ -45,16 +42,12 @@ class DetailActivity : DefaultActivity(), MVP.View {
         presenter = Presenter()
         presenter.setView(this)
         presenter.updateData(item!!)
-    }
 
-    override fun onStart() {
-        super.onStart()
-
-        // FloatingActionButton
         detailBtnHQ = findViewById(R.id.detailBtnHQ)
         detailBtnHQ.setOnClickListener{ goComics() }
     }
 
+    override fun initViewModel() {}
     override fun onSupportNavigateUp(): Boolean {
         back()
         return true
@@ -63,13 +56,15 @@ class DetailActivity : DefaultActivity(), MVP.View {
     override fun back() { onBackPressed() }
 
     private fun goComics() {
-        var characterId: Int? = item?.id
-        var characterName: String? = item?.name
+        val characterId: Int? = item?.id
+        val characterName: String? = item?.name
 
         val bundle = Bundle()
-            bundle.putInt("CHARACTER_ID"     , characterId!!)
-            bundle.putString("CHARACTER_NAME", characterName!!)
-            bundle.putString("CHARACTER_URL" , imageUrl)
+            bundle.apply {
+                putInt("CHARACTER_ID"     , characterId!!)
+                putString("CHARACTER_NAME", characterName!!)
+                putString("CHARACTER_URL" , imageUrl)
+            }
 
         val intent = Intent(this, ComicsActivity::class.java)
             intent.putExtras(bundle)

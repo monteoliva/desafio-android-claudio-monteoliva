@@ -18,7 +18,7 @@ import br.com.desafioandroidclaudiomonteoliva.view.adapter.ItemAdapter
 import br.com.desafioandroidclaudiomonteoliva.view.components.Progress
 import br.com.desafioandroidclaudiomonteoliva.view.pagination.PaginationListener
 
-class MainActivity : DefaultActivity(), MVP.View {
+class MainActivity : DefaultActivity(R.layout.activity_main), MVP.View {
     private lateinit var progress: Progress
     private lateinit var rv: RecyclerView
     private lateinit var presenter: MVP.Presenter
@@ -28,10 +28,7 @@ class MainActivity : DefaultActivity(), MVP.View {
     private var isLastPage: Boolean = false
     private var isLoading: Boolean = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+    override fun initViews() {
         setupToolBar(R.id.toolbar)
         setActionBarTitle("")
 
@@ -44,6 +41,8 @@ class MainActivity : DefaultActivity(), MVP.View {
 
         Handler().postDelayed({ onLoad() }, 100)
     }
+
+    override fun initViewModel() {}
 
     private fun onLoad() {
         val layoutManager = GridLayoutManager(this, 2)

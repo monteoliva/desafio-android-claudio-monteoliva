@@ -1,5 +1,6 @@
 package br.com.desafioandroidclaudiomonteoliva.view
 
+import android.os.Bundle
 import android.view.KeyEvent
 
 import androidx.appcompat.app.ActionBar
@@ -8,9 +9,15 @@ import androidx.appcompat.widget.Toolbar
 
 import br.com.desafioandroidclaudiomonteoliva.utils.UtilsAnimation
 
-abstract class DefaultActivity : AppCompatActivity() {
+abstract class DefaultActivity(private val resourceId: Int) : AppCompatActivity(resourceId) {
     private var actionBar: ActionBar? = null
     private var mToolbar: Toolbar? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initViews()
+        initViewModel()
+    }
 
     fun setupToolBar(resource: Int) {
         mToolbar = findViewById(resource)
@@ -68,8 +75,7 @@ abstract class DefaultActivity : AppCompatActivity() {
         UtilsAnimation.bottomToTop(this)
     }
 
-    /**
-     * Method to back old activity or finish application
-     */
     abstract fun back()
+    abstract fun initViews()
+    abstract fun initViewModel()
 }
