@@ -87,13 +87,14 @@ class MainActivity : DefaultActivity(R.layout.activity_main), MVP.View {
     }
 
     fun detail(item: Result) {
-        var bundle = Bundle()
+        val bundle = Bundle()
             bundle.putParcelable("ITEM", item)
 
-        var intent = Intent(this, DetailActivity::class.java)
-            intent.putExtras(bundle)
+        Intent(this, DetailActivity::class.java).apply {
+            putExtras(bundle)
+            startActivity(this)
+        }
 
-        startActivity(intent)
         animBottomToTop()
     }
 }
