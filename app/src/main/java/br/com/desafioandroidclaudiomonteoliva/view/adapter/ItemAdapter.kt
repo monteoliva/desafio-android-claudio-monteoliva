@@ -27,7 +27,7 @@ class ItemAdapter(private val activity: MainActivity,
 
     override fun getItemCount(): Int = list.size
 
-    override fun getItemId(position: Int): Long = list[position].id!!.toLong()
+    override fun getItemId(position: Int): Long = list[position].id.toLong()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: Result = getItem(position)

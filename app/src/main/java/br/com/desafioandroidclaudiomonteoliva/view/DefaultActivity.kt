@@ -2,6 +2,8 @@ package br.com.desafioandroidclaudiomonteoliva.view
 
 import android.os.Bundle
 import android.view.KeyEvent
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +21,7 @@ abstract class DefaultActivity(private val resourceId: Int) : AppCompatActivity(
         initViewModel()
     }
 
-    fun setupToolBar(resource: Int) {
+    fun setupToolBar(@IdRes resource: Int) {
         mToolbar = findViewById(resource)
         setSupportActionBar(mToolbar)
         actionBar = supportActionBar
@@ -31,11 +33,11 @@ abstract class DefaultActivity(private val resourceId: Int) : AppCompatActivity(
     fun setActionBarNotHome()       { actionBar?.setHomeButtonEnabled(false) }
     fun setActionBarNotHomeButton() { actionBar?.setDisplayHomeAsUpEnabled(false) }
 
-    fun setActionBarTitle(title: String) { actionBar?.title = title }
-    fun setActionBarTitle(title: Int)    { actionBar?.title = getString(title) }
+    fun setActionBarTitle(title: String)         { actionBar?.title = title }
+    fun setActionBarTitle(@StringRes title: Int) { actionBar?.title = getString(title) }
 
-    fun setActionBarSubTitle(title: String) { actionBar?.subtitle = title }
-    fun setActionBarSubTitle(title: Int)    { actionBar?.subtitle = getString(title) }
+    fun setActionBarSubTitle(title: String)         { actionBar?.subtitle = title }
+    fun setActionBarSubTitle(@StringRes title: Int) { actionBar?.subtitle = getString(title) }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         return if (keyCode == KeyEvent.KEYCODE_BACK) {
