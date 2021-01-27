@@ -2,7 +2,7 @@ package br.com.desafioandroidclaudiomonteoliva.presenter.comics
 
 import android.content.Context
 
-import br.com.desafioandroidclaudiomonteoliva.model.gson.comics.bean.ComicsBean
+import br.com.desafioandroidclaudiomonteoliva.model.contracts.comics.bean.ComicsBean
 
 /**
  * MVP - Comics

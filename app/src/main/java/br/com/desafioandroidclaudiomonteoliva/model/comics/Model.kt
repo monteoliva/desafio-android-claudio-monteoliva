@@ -2,16 +2,15 @@ package br.com.desafioandroidclaudiomonteoliva.model.comics
 
 import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 
 import com.google.gson.Gson
 
 import br.com.desafioandroidclaudiomonteoliva.model.enums.Endpoints
-import br.com.desafioandroidclaudiomonteoliva.model.gson.Thumbnail
-import br.com.desafioandroidclaudiomonteoliva.model.gson.comics.Comics
-import br.com.desafioandroidclaudiomonteoliva.model.gson.comics.bean.ComicsBean
+import br.com.desafioandroidclaudiomonteoliva.model.contracts.Thumbnail
+import br.com.desafioandroidclaudiomonteoliva.model.contracts.comics.Comics
+import br.com.desafioandroidclaudiomonteoliva.model.contracts.comics.bean.ComicsBean
 import br.com.desafioandroidclaudiomonteoliva.presenter.comics.MVP
 import br.com.desafioandroidclaudiomonteoliva.utils.Constantes
 import br.com.desafioandroidclaudiomonteoliva.utils.Utils
@@ -29,40 +28,40 @@ class Model(private val presenter: MVP.Presenter): MVP.Model {
         val request = StringRequest(
             Request.Method.GET,
             baseUrl,
-            Response.Listener<String> {
-                var prices: MutableList<ComicsBean> = emptyList<ComicsBean>().toMutableList()
-                var dados: Comics = Gson().fromJson(it.trim(), Comics::class.java)
+            {
+                val prices: MutableList<ComicsBean> = emptyList<ComicsBean>().toMutableList()
+                val dados: Comics = Gson().fromJson(it.trim(), Comics::class.java)
 
-                dados.data.results.forEach {
-                    var title: String        = it.title
-                    var description: String  = it.description
-                    var thumbnail: Thumbnail = it.thumbnail
-                    it.prices.forEach {
-                        if (it.type.equals("printPrice") && it.price > 0) {
+                dados.data.results.forEach { result ->
+                    val title: String        = result.title
+                    val description: String  = result.description
+                    val thumbnail: Thumbnail = result.thumbnail
+                    result.prices.forEach { price ->
+                        if (price.type == "printPrice" && price.price > 0) {
                             try {
-                                prices.add(ComicsBean(title, description, it.price, thumbnail))
+                                prices.add(ComicsBean(title, description, price.price, thumbnail))
                             }
                             catch (ne: KotlinNullPointerException) {}
                         }
                     }
                 }
 
-                var imageThumb: Thumbnail = Thumbnail("http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available", "jpg")
-                var priceOld = ComicsBean("No title","No description", 0.00, imageThumb)
+                val imageThumb: Thumbnail = Thumbnail("http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available", "jpg")
+                val priceOld = ComicsBean("No title","No description", 0.00, imageThumb)
 
-                prices.forEach{
-                    if (it.price > priceOld.price) {
-                        priceOld.title       = it.title
-                        priceOld.description = it.description
-                        priceOld.price       = it.price
-                        priceOld.thumbnail   = it.thumbnail
+                prices.forEach{ comics ->
+                    if (comics.price > priceOld.price) {
+                        priceOld.title       = comics.title
+                        priceOld.description = comics.description
+                        priceOld.price       = comics.price
+                        priceOld.thumbnail   = comics.thumbnail
                     }
                 }
 
                 presenter.updateData(priceOld)
                 presenter.showProgressBar(false)
             },
-            Response.ErrorListener {}
+            {}
         )
 
         requestQueue.add(request)

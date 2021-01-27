@@ -2,7 +2,7 @@ package br.com.desafioandroidclaudiomonteoliva.presenter.detail
 
 import android.content.Context
 
-import br.com.desafioandroidclaudiomonteoliva.model.gson.character.Result
+import br.com.desafioandroidclaudiomonteoliva.model.contracts.character.Result
 
 /**
  * MVP - Detail

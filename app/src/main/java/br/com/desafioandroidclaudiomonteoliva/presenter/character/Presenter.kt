@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 
 import br.com.desafioandroidclaudiomonteoliva.model.character.Model
-import br.com.desafioandroidclaudiomonteoliva.model.gson.character.Result
+import br.com.desafioandroidclaudiomonteoliva.model.contracts.character.Result
 
 class Presenter : MVP.Presenter {
     private lateinit var view: MVP.View

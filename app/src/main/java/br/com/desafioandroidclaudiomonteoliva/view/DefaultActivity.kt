@@ -11,12 +11,13 @@ import androidx.appcompat.widget.Toolbar
 
 import br.com.desafioandroidclaudiomonteoliva.utils.UtilsAnimation
 
-abstract class DefaultActivity(private val resourceId: Int) : AppCompatActivity(resourceId) {
+abstract class DefaultActivity(private val resourceId: Int) : AppCompatActivity() {
     private var actionBar: ActionBar? = null
     private var mToolbar: Toolbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(resourceId)
         initViews()
         initViewModel()
     }
@@ -49,33 +50,10 @@ abstract class DefaultActivity(private val resourceId: Int) : AppCompatActivity(
         }
     }
 
-    /**
-     * Method to animate activity Left to Right
-     */
-    fun animLeftToRight() {
-        UtilsAnimation.leftToRight(this)
-    }
-
-    /**
-     * Method to animate activity Right to Left
-     */
-    fun animRightToLeft() {
-        UtilsAnimation.rightToLeft(this)
-    }
-
-    /**
-     * Method to animate activity Top to Bottom
-     */
-    fun animTopToBottom() {
-        UtilsAnimation.topToBottom(this)
-    }
-
-    /**
-     * Method to animate activity Bottom to Top
-     */
-    fun animBottomToTop() {
-        UtilsAnimation.bottomToTop(this)
-    }
+    fun animLeftToRight() { UtilsAnimation.leftToRight(this) }
+    fun animRightToLeft() { UtilsAnimation.rightToLeft(this) }
+    fun animTopToBottom() { UtilsAnimation.topToBottom(this) }
+    fun animBottomToTop() { UtilsAnimation.bottomToTop(this) }
 
     abstract fun back()
     abstract fun initViews()

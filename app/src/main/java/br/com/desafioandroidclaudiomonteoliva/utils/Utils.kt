@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException
 import java.security.MessageDigest
 
 object Utils {
-    fun authorization(): String? {
+    fun authorization(): String {
         val timestamp: String = UtilsDate.getDate("time")
         val result: String    = timestamp + Constantes.privateKey + Constantes.publicKey
 

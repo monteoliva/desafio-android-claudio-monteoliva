@@ -1,9 +1,8 @@
 package br.com.desafioandroidclaudiomonteoliva.presenter.character
 
 import android.content.Context
-import android.os.Bundle
 
-import br.com.desafioandroidclaudiomonteoliva.model.gson.character.Result
+import br.com.desafioandroidclaudiomonteoliva.model.contracts.character.Result
 
 /**
  * MVP - Character

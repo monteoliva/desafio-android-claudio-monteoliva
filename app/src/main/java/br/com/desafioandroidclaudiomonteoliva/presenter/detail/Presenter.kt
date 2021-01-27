@@ -1,15 +1,7 @@
 package br.com.desafioandroidclaudiomonteoliva.presenter.detail
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
-import br.com.desafioandroidclaudiomonteoliva.model.gson.character.Result
-import br.com.desafioandroidclaudiomonteoliva.presenter.detail.MVP
-import br.com.desafioandroidclaudiomonteoliva.view.DefaultActivity
-import com.squareup.picasso.Picasso
-import com.squareup.picasso.Target
+import br.com.desafioandroidclaudiomonteoliva.model.contracts.character.Result
 
 class Presenter : MVP.Presenter {
     private lateinit var view: MVP.View

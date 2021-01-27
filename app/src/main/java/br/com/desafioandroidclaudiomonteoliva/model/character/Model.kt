@@ -3,15 +3,14 @@ package br.com.desafioandroidclaudiomonteoliva.model.character
 import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 
 import com.google.gson.Gson
 
 import br.com.desafioandroidclaudiomonteoliva.model.enums.Endpoints
-import br.com.desafioandroidclaudiomonteoliva.model.gson.character.Characters
-import br.com.desafioandroidclaudiomonteoliva.model.gson.character.Result
+import br.com.desafioandroidclaudiomonteoliva.model.contracts.character.Characters
+import br.com.desafioandroidclaudiomonteoliva.model.contracts.character.Result
 import br.com.desafioandroidclaudiomonteoliva.presenter.character.MVP
 import br.com.desafioandroidclaudiomonteoliva.utils.Constantes
 import br.com.desafioandroidclaudiomonteoliva.utils.Utils
@@ -29,14 +28,14 @@ class Model(private val presenter: MVP.Presenter): MVP.Model {
         val request = StringRequest(
             Request.Method.GET,
             baseUrl,
-            Response.Listener<String> {
-                var list: MutableList<Result> = emptyList<Result>().toMutableList()
-                var dados: Characters = Gson().fromJson(it.trim(), Characters::class.java)
+            {
+                val list: MutableList<Result> = emptyList<Result>().toMutableList()
+                val dados: Characters = Gson().fromJson(it.trim(), Characters::class.java)
 
                 // get total characteres
                 TOTAL = dados.data.total
 
-                dados.data?.results?.forEach { list.add(it) }
+                dados.data.results?.forEach { list.add(it) }
 
                 when(type) {
                     LoadType.FIRST -> {
@@ -49,7 +48,7 @@ class Model(private val presenter: MVP.Presenter): MVP.Model {
                     }
                 }
             },
-            Response.ErrorListener {}
+            {}
         )
 
         requestQueue.add(request)
@@ -70,8 +69,8 @@ class Model(private val presenter: MVP.Presenter): MVP.Model {
 
             presenter.showLoading(true)
 
-            Log.d("MORE ITENS", "TOTAL MORE ITENS: " + TOTAL.toString())
-            Log.d("MORE ITENS", "OFFSET MORE ITENS: " + offset.toString())
+            Log.d("MORE ITENS", "TOTAL MORE ITENS: $TOTAL")
+            Log.d("MORE ITENS", "OFFSET MORE ITENS: $offset")
 
             onLoad(LoadType.MORE)
         }

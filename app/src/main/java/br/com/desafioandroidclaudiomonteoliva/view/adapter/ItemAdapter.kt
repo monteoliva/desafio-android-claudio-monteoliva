@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.squareup.picasso.Picasso
 
-import br.com.desafioandroidclaudiomonteoliva.model.gson.character.Result
+import br.com.desafioandroidclaudiomonteoliva.model.contracts.character.Result
 import br.com.desafioandroidclaudiomonteoliva.R
-import br.com.desafioandroidclaudiomonteoliva.view.MainActivity
+import br.com.desafioandroidclaudiomonteoliva.view.main.MainActivity
 
 class ItemAdapter(private val activity: MainActivity,
                   private val list: MutableList<Result>) : RecyclerView.Adapter<ItemAdapter.ViewHolder>()  {

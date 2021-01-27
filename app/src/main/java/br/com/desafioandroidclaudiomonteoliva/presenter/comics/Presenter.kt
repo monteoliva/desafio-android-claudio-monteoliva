@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 
 import br.com.desafioandroidclaudiomonteoliva.model.comics.Model
-import br.com.desafioandroidclaudiomonteoliva.model.gson.comics.bean.ComicsBean
+import br.com.desafioandroidclaudiomonteoliva.model.contracts.comics.bean.ComicsBean
 
 class Presenter : MVP.Presenter {
     private lateinit var view: MVP.View
