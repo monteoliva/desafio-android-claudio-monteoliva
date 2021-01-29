@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
-import androidx.lifecycle.Observer
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +26,7 @@ import br.com.desafioandroidclaudiomonteoliva.view.pagination.PaginationListener
 class MainActivity : DefaultActivity(R.layout.activity_main), MVP.View {
     private var progress: Progress by Delegates.notNull()
     private var presenter: MVP.Presenter  by Delegates.notNull()
-    private var adapter: ItemAdapter  by Delegates.notNull()
+    private var mAdapter: ItemAdapter  by Delegates.notNull()
     private var loading: ProgressBar  by Delegates.notNull()
 
     private var isLastPage: Boolean = false
@@ -46,26 +45,27 @@ class MainActivity : DefaultActivity(R.layout.activity_main), MVP.View {
         presenter.setView(this)
         presenter.retriveFirstCharacters()
 
-        viewModel.characters.observe(this, { onLoad(it) })
-
-
-
 //        Handler(Looper.getMainLooper()).postDelayed({ onLoad() }, 100)
     }
 
     override fun initViewModel() {
-        viewModel.setList(presenter.characters)
+        viewModel.apply {
+            setList(presenter.characters)
+            characters.observe(this@MainActivity, { onLoad(it) })
+        }
     }
 
     private fun onLoad(characters: MutableList<Result>) {
         val mLayoutManager = GridLayoutManager(this, 2)
 
-        adapter = ItemAdapter(this, characters)
+        mAdapter = ItemAdapter(this).apply {
+            updateList(characters)
+        }
 
         findViewById<RecyclerView>(R.id.rv).apply {
             setHasFixedSize(true)
             layoutManager = mLayoutManager
-            adapter = adapter
+            adapter = mAdapter
             addOnScrollListener(object : PaginationListener(mLayoutManager) {
                 override fun loadMoreItems() {
                     Log.d("MORE ITENS", "LOAD MORE ITENS")
@@ -92,12 +92,12 @@ class MainActivity : DefaultActivity(R.layout.activity_main), MVP.View {
     }
 
     override fun updateListRecycler() {
-        adapter.notifyDataSetChanged()
+        mAdapter.notifyDataSetChanged()
     }
 
     override fun paginationRecycler() {
         isLoading = false
-        adapter.notifyDataSetChanged()
+        mAdapter.notifyDataSetChanged()
     }
 
     fun detail(item: Result) {

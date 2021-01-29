@@ -15,14 +15,20 @@ import br.com.desafioandroidclaudiomonteoliva.model.contracts.character.Result
 import br.com.desafioandroidclaudiomonteoliva.R
 import br.com.desafioandroidclaudiomonteoliva.view.main.MainActivity
 
-class ItemAdapter(private val activity: MainActivity,
-                  private val list: MutableList<Result>) : RecyclerView.Adapter<ItemAdapter.ViewHolder>()  {
+class ItemAdapter(private val activity: MainActivity) : RecyclerView.Adapter<ItemAdapter.ViewHolder>()  {
+
+    private var list: MutableList<Result> = emptyList<Result>().toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.item_list, parent, false)
         return ViewHolder(this, view)
+    }
+
+    fun updateList(items: MutableList<Result>) {
+        list = items
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = list.size

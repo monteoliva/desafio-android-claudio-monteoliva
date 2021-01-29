@@ -26,9 +26,8 @@ class DetailActivity : DefaultActivity(R.layout.activity_detail), MVP.View {
     private var imageUrl: String = ""
 
     override fun initViews() {
-        val bundle: Bundle? = intent.extras
-        if (bundle != null) {
-            item = bundle.getParcelable("ITEM")
+        intent?.extras?.apply {
+            item = getParcelable("ITEM")
         }
 
         setupToolBar(R.id.detailToolbar)
