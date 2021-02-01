@@ -1,27 +1,30 @@
 package br.com.desafioandroidclaudiomonteoliva.view.adapter
 
-import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 
 import androidx.recyclerview.widget.RecyclerView
 
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 
 import br.com.desafioandroidclaudiomonteoliva.model.contracts.character.Result
 import br.com.desafioandroidclaudiomonteoliva.R
 import br.com.desafioandroidclaudiomonteoliva.view.main.MainActivity
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 
 class ItemAdapter(private val activity: MainActivity) : RecyclerView.Adapter<ItemAdapter.ViewHolder>()  {
 
     private var list: MutableList<Result> = emptyList<Result>().toMutableList()
+    private var imageDefault: Drawable? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        imageDefault = ContextCompat.getDrawable(parent.context, R.mipmap.ic_image_not_available)
         val view = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.item_list, parent, false)
@@ -47,13 +50,14 @@ class ItemAdapter(private val activity: MainActivity) : RecyclerView.Adapter<Ite
 
             Glide.with(activity.baseContext)
                 .load(imageUrl)
+                .error(imageDefault)
                 .into(itemImage)
 
 //            Picasso.get().load(imageUrl).into(itemImage)
         }
     }
 
-    fun getItem(position: Int): Result = list[position]
+    private fun getItem(position: Int): Result = list[position]
 
     fun detail(item: Result) { activity.detail(item) }
 
