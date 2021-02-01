@@ -1,5 +1,6 @@
 package br.com.desafioandroidclaudiomonteoliva.view.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.squareup.picasso.Picasso
 import br.com.desafioandroidclaudiomonteoliva.model.contracts.character.Result
 import br.com.desafioandroidclaudiomonteoliva.R
 import br.com.desafioandroidclaudiomonteoliva.view.main.MainActivity
+import com.bumptech.glide.Glide
 
 class ItemAdapter(private val activity: MainActivity) : RecyclerView.Adapter<ItemAdapter.ViewHolder>()  {
 
@@ -38,12 +40,16 @@ class ItemAdapter(private val activity: MainActivity) : RecyclerView.Adapter<Ite
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: Result = getItem(position)
 
-        val imageUrl = "${item.thumbnail?.path}.${item.thumbnail?.extension}"
+        val imageUrl = "${item.thumbnail.path}.${item.thumbnail.extension}"
 
         holder.apply {
             itemName.text = item.name
 
-            Picasso.get().load(imageUrl).into(itemImage)
+            Glide.with(activity.baseContext)
+                .load(imageUrl)
+                .into(itemImage)
+
+//            Picasso.get().load(imageUrl).into(itemImage)
         }
     }
 

@@ -7,7 +7,7 @@ import android.os.Handler
 import android.os.Looper
 
 import br.com.desafioandroidclaudiomonteoliva.R
-import br.com.desafioandroidclaudiomonteoliva.utils.UtilsAnimation
+import br.com.desafioandroidclaudiomonteoliva.utils.leftToRight
 import br.com.desafioandroidclaudiomonteoliva.view.main.MainActivity
 
 class SplashScreen : AppCompatActivity() {
@@ -25,7 +25,7 @@ class SplashScreen : AppCompatActivity() {
             Intent(this, MainActivity::class.java).apply {
                 startActivity(this)
                 finish()
-                UtilsAnimation.leftToRight(this@SplashScreen)
+                this@SplashScreen.leftToRight()
             }
         }, seconds)
 
