@@ -4,7 +4,13 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.text.DecimalFormat
 import java.util.*
+import android.content.Context
 import android.view.View
+import android.widget.ImageView
+
+import com.bumptech.glide.Glide
+
+import br.com.monteoliva.desafioandroidclaudiomonteoliva.R
 
 fun View.visible()   { this.visibility = View.VISIBLE   }
 fun View.invisible() { this.visibility = View.INVISIBLE }
@@ -17,6 +23,13 @@ fun View.visibility(show: Boolean) {
 fun View.isVisible():   Boolean = this.visibility == View.VISIBLE
 fun View.isInvisible(): Boolean = this.visibility == View.INVISIBLE
 fun View.isGone():      Boolean = this.visibility == View.GONE
+
+fun ImageView.loadImageByGlide(context: Context, url: String?) {
+    Glide.with(context)
+        .load(url)
+        .error(R.mipmap.ic_usuario)
+        .into(this)
+}
 
 fun String.getDate(ff: String) : String {
     val dataO  = if (this.trim().length > 10) "yyyy-MM-dd HH:mm:ss" else "yyyy-MM-dd"
@@ -44,4 +57,4 @@ fun String.getDate(ff: String) : String {
     return ""
 }
 
-fun Long?.formatNumber() : String = DecimalFormat("###,##0").format(this)
+fun Double?.formatNumber() : String = DecimalFormat("'R$' ###,##0.00").format(this)

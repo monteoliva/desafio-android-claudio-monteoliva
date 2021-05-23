@@ -7,7 +7,9 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
 
+import br.com.monteoliva.desafioandroidclaudiomonteoliva.repository.core.modules.adapterModule
 import br.com.monteoliva.desafioandroidclaudiomonteoliva.repository.core.modules.networkModule
+import br.com.monteoliva.desafioandroidclaudiomonteoliva.repository.core.modules.viewModelModule
 
 class DesafioApplication : Application() {
     override fun onCreate() {
@@ -16,7 +18,7 @@ class DesafioApplication : Application() {
             androidLogger()
             androidContext(this@DesafioApplication)
             loadKoinModules(
-                listOf(networkModule)
+                listOf(networkModule, adapterModule, viewModelModule)
             )
         }
     }

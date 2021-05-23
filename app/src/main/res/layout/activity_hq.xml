@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.feature.hq.HqActivity"
+    android:background="@color/background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/transparent">
+        <include layout="@layout/app_bar" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@android:color/transparent">
+                <ImageView
+                    android:id="@+id/hqImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_400"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    tools:ignore="ContentDescription"
+                    android:src="@mipmap/ic_marvel_logo" />
+                <TextView
+                    android:id="@+id/characterHqName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimens_10"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimens_18sp"
+                    android:textStyle="bold"
+                    tools:text="Character Name" />
+                <TextView
+                    android:id="@+id/priceHq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimens_10"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimens_18sp"
+                    android:textStyle="bold"
+                    tools:text="R$ 2,99" />
+                <TextView
+                    android:id="@+id/descriptionHq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimens_10"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimens_18sp"
+                    tools:text="nono nono nono nono nono nono nono nono nono nono nono nono nono nono" />
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+        </ScrollView>
+    </LinearLayout>
+
+
+    <br.com.monteoliva.desafioandroidclaudiomonteoliva.ui.components.Progress
+        android:id="@+id/progressHq"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">DesafioAndroidClaudioMonteoliva</string>
+    <string name="app_name">Desafio Android Claudio Monteoliva</string>
+    <string name="wait">Aguarde…</string>
 </resources>
